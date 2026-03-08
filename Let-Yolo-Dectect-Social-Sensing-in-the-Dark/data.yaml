@@ -1,0 +1,22 @@
+# 替换为你自己的绝对路径
+path: /Users/yangxi/Desktop/python_project/Project_Chameleon/yolo_dataset 
+train: 
+  - train/images
+  - adversarial/images
+val: val/images
+
+# 类别数量 (对应 download_emojis.py 里的 0-9)
+nc: 10
+
+# 类别名称 (用于显示结果)
+names:
+  0: Sweat_Smile_😅
+  1: Upside_Down_🙃
+  2: Watermelon_🍉
+  3: Clown_🤡
+  4: Rolling_Eyes_🙄
+  5: Thinking_🤔
+  6: Moon_🌚
+  7: OK_Hand_👌
+  8: Hot_Face_🥵
+  9: Nail_Polish_💅
