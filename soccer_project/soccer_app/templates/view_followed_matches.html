@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>已关注球队的比赛 - RealFootball</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding-top: 50px;
+    }
+    .match-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="match-card mx-auto" style="max-width: 800px;">
+    <h3 class="text-center text-primary mb-4">⚽ 已关注球队的比赛</h3>
+
+    <!-- 筛选框 -->
+    <form method="get" class="mb-4">
+      <label class="form-label">选择球队：</label>
+      <select name="team_id" class="form-select" onchange="this.form.submit()">
+        <option value="">全部比赛</option>
+        {% for team in teams %}
+          <option value="{{ team.team_api_id }}" {% if team.team_api_id|stringformat:"s" == selected_team_id %}selected{% endif %}>
+            {{ team.team_long_name }}
+          </option>
+        {% endfor %}
+      </select>
+    </form>
+
+    <!-- 比赛结果 -->
+    {% if has_data %}
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-sm text-center align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>比赛 ID</th>
+              <th>日期</th>
+              <th>主队</th>
+              <th>客队</th>
+              <th>主队进球</th>
+              <th>客队进球</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for match in matches %}
+            <tr>
+              <td>{{ match.match_api_id }}</td>
+              <td>{{ match.date }}</td>
+              <td>{{ match.home_team_api_id }}</td>
+              <td>{{ match.away_team_api_id }}</td>
+              <td>{{ match.home_team_goal }}</td>
+              <td>{{ match.away_team_goal }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="alert alert-secondary text-center">暂无比赛记录</div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+      <a href="/dashboard/" class="btn btn-outline-secondary">返回功能页面</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
